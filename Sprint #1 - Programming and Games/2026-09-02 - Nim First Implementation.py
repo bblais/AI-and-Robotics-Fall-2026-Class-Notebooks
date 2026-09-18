@@ -71,37 +71,37 @@ def valid_moves(state,player):
         return [1,2,3]
 
 
-# In[10]:
+# In[6]:
 
 
 valid_moves(16,1)
 
 
-# In[11]:
+# In[7]:
 
 
 valid_moves(2,1)
 
 
-# In[12]:
+# In[8]:
 
 
 valid_moves(1,1)
 
 
-# In[13]:
+# In[9]:
 
 
 valid_moves(0,1)
 
 
-# In[14]:
+# In[10]:
 
 
 valid_moves(-5,1)
 
 
-# In[18]:
+# In[11]:
 
 
 def update_state(state,player,move):
@@ -110,19 +110,19 @@ def update_state(state,player,move):
     return new_state
 
 
-# In[19]:
+# In[12]:
 
 
 update_state(16,1,3)
 
 
-# In[20]:
+# In[13]:
 
 
 update_state(16,1,15)
 
 
-# In[21]:
+# In[14]:
 
 
 def win_status(state,player):
@@ -143,7 +143,7 @@ def win_status(state,player):
         return None
 
 
-# In[23]:
+# In[15]:
 
 
 win_status(0,2)
@@ -151,7 +151,7 @@ win_status(0,2)
 
 # # Agents
 
-# In[24]:
+# In[16]:
 
 
 def random_move(state,player):
@@ -161,7 +161,7 @@ def random_move(state,player):
 random_agent=Agent(random_move)
 
 
-# In[26]:
+# In[17]:
 
 
 def human_move(state,player):
@@ -177,7 +177,7 @@ def human_move(state,player):
 human_agent=Agent(human_move)    
 
 
-# In[28]:
+# In[18]:
 
 
 human_move(16,2)
@@ -191,11 +191,34 @@ human_move(2,2)
 
 # # Running the Game
 
-# In[34]:
+# In[19]:
 
 
 g=Game()
-g.run(random_agent,human_agent)
+g.run(random_agent,random_agent)
+
+
+# In[20]:
+
+
+def lower_move(state,player):
+    moves=valid_moves(state,player)
+    moves=sorted(moves)
+
+    new_moves=[]
+    count=10
+    for move in moves:
+        new_moves.extend([move]*count)
+        count-=3
+        if count<=0:
+            count=1
+
+    print(moves)
+    print(new_moves)
+
+    return random.choice(new_moves)
+
+lower_move(21,1)
 
 
 # In[ ]:
